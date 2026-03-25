@@ -34,6 +34,7 @@ export function renderTasks(tasks, mainHeaderText) {
     let newTaskCard = document.createElement("div");
     newTaskCard.classList.add("task-card");
     newTaskCard.setAttribute("data-index", index);  // setting index number for each to-do card
+    newTaskCard.dataset.id = task.id;
     
     let taskDetails = document.createElement("div");
     taskDetails.classList.add("task-details");

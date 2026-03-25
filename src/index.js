@@ -28,9 +28,15 @@ container.addEventListener("click", function(e){
     if(!deleteBtn) return;
 
     let card = deleteBtn.closest(".task-card");
-    let index = card.getAttribute("data-index");
+    // let index = card.getAttribute("data-index");
+    // tasks.splice(index, 1);
 
-    tasks.splice(index, 1);
+    let id = card.dataset.id;
+    let index = tasks.findIndex(task => task.id === id);
+    if(index !== -1){
+        tasks.splice(index, 1);
+    }
+
     renderTasks(tasks, mainHeader.textContent);
 })
 
@@ -105,3 +111,4 @@ byDateBtns.addEventListener("click", function(e){
     mainHeader.textContent = validTypeBtns.querySelector("div").textContent;
     renderTasks(tasks, mainHeader.textContent);
 })
+

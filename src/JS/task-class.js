@@ -6,5 +6,6 @@ export class Task{
         this.desc = desc;
         this.dueDate = dueDate;
         this.priority = priority;
+        this.id = crypto.randomUUID();
     }
 }
