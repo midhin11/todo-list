@@ -19,15 +19,14 @@ h1, h2, h3, h4, h5, h6, p {
 }
 
 .main {
-  flex-grow: 20;
+  flex-grow: 1;
 }
 
 /* SIDEBAR */
 
 .sidebar {
-  flex-basis: 250px;
+  width: 300px;
   padding: 10px;
-  flex-grow: 1;
   background-color: oklch(20.8% 0.042 265.755);
 }
 
@@ -143,6 +142,8 @@ h1, h2, h3, h4, h5, h6, p {
 
 .main {
   padding: 20px ;
+  display: flex;
+  flex-direction: column;
 }
 
 .main-header, .main-content {
@@ -195,6 +196,23 @@ h1, h2, h3, h4, h5, h6, p {
   transform: scale(0.95);
 }
 
+.main-content {
+  flex-grow: 1;
+}
+
+.empty-main-content {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.empty-main-content > * {
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+}
+
 .main-content svg {
   width: 25px;
   fill: white;
@@ -230,6 +248,17 @@ h1, h2, h3, h4, h5, h6, p {
 .actions {
   display: flex;
   gap: 1.2rem;
+  align-items: center;
+}
+
+.actions > div:nth-child(2) {
+  display: flex;
+  gap: 1.2rem;
+  align-items: center;
+}
+
+.priority {
+  color: red;
 }
 
 
