@@ -7,5 +7,6 @@ export class Task{
         this.dueDate = dueDate;
         this.priority = priority;
         this.id = crypto.randomUUID();
+        this.completed = false;
     }
 }

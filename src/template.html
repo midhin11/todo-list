@@ -9,20 +9,20 @@
     <link href="https://fonts.googleapis.com/css2?family=Black+Ops+One&family=IBM+Plex+Sans:ital,wght@0,100..700;1,100..700&family=Roboto:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
 </head>
 <body>
-    <div id="modal" class="hidden">
+    <form id="modal" class="hidden">
         <div class="input-dialog">
             <h2>Add Task</h2>
             <div>
                 <label for="title">Title:</label>
-                <input class="add-task-input" type="text" name="title" id="title" placeholder="Research articles on food blog" value="Research articles on food blog">
+                <input class="add-task-input" type="text" name="title" id="title" placeholder="Research articles on food blog" value="Research articles on food blog" required>
             </div>
             <div>
                 <label for="description">Description:</label>
-                <textarea name="description" id="description" placeholder="Lorem ipsum dolor sit amet consectetur, adipisicing elit." >Lorem ipsum dolor sit amet consectetur, adipisicing elit.</textarea>
+                <textarea name="description" id="description" placeholder="To read the lorem lore" required>Lorem ipsum dolor sit amet consectetur, adipisicing elit.</textarea>
             </div>
             <div>
                 <label for="due-date">Due Date:</label>
-                <input type="datetime-local" id="due-date" name="due-date" value="2025-06-01T08:30">
+                <input type="datetime-local" id="due-date" name="due-date" value="2025-06-01T08:30" required>
             </div>
             <div>
                 <label for="priority">Priority:</label>
@@ -37,7 +37,7 @@
                 <button class="cancel-btn" type="button">Cancel</button>
             </div>
         </div>
-    </div>
+    </form>
 
     <form id="add-project-modal" class="hidden">
         <div class="add-project-dialog">

@@ -20,6 +20,8 @@ let taskNameInput = document.querySelector(`.add-task-input`);
 let taskDescInput = document.querySelector("textarea");
 let taskDueDateInput = document.querySelector(`input[type="datetime-local"]`);
 let taskPriorityInput = document.querySelector("select");
+let mainHeader = document.querySelector(".type");
+mainHeader.textContent = "All"
 
 //Task input modal pop-up
 
@@ -67,7 +69,8 @@ addTask.forEach(btn => {
 // Submit Btn in Input Dialog
 
 let submit = document.querySelector(".submit-btn");
-submit.addEventListener("click", function(){
+modal.addEventListener("submit", function(e){
+    e.preventDefault();
     if(modalMode === "add"){
         add();
     } else if(modalMode === "edit"){
@@ -109,8 +112,6 @@ cancelBtn.addEventListener("click", function() {
 // Sidebar by date Btns 
 
 let byDateBtns = document.querySelector(".by-date");
-let mainHeader = document.querySelector(".type");
-mainHeader.textContent = "All"
 byDateBtns.addEventListener("click", function(e){
     let validTypeBtns = e.target.closest(".by-date-type");
     if(!validTypeBtns) return;
@@ -119,7 +120,7 @@ byDateBtns.addEventListener("click", function(e){
 })
 
 
-// Expand task
+// Expand task Btn
 
 container.addEventListener("click", function(e){
     let expandBtn = e.target.closest(".expand-task");
@@ -138,6 +139,7 @@ container.addEventListener("click", function(e){
 
 
 function edit() {
+
     let taskBeingEdited = tasks.find(task => task.id === currentTaskId);    
 
     taskBeingEdited.title = taskNameInput.value;
@@ -148,6 +150,19 @@ function edit() {
     modal.classList.add("hidden");
     renderTasks(tasks, mainHeader.textContent);
 }
+
+// Check task Btn
+
+
+container.addEventListener("click", function(e){
+    let completedBtn = e.target.closest(".complete");
+    if(!completedBtn) return;
+    let card = completedBtn.closest(".task-card");
+    let id = card.dataset.id;
+    let completedTask = tasks.find(task => task.id === id);
+    completedTask.completed = !completedTask.completed;
+    renderTasks(tasks, mainHeader.textContent);
+})
 
 
 // Add Project 

@@ -405,3 +405,7 @@ input {
   font-weight: 700;
   transition: transform 0.1s ease;
 }
+
+.done {
+  text-decoration: line-through;
+}
