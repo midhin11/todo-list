@@ -14,7 +14,7 @@
             <h2>Add Task</h2>
             <div>
                 <label for="title">Title:</label>
-                <input type="text" name="title" id="title" placeholder="Research articles on food blog" value="Research articles on food blog">
+                <input class="add-task-input" type="text" name="title" id="title" placeholder="Research articles on food blog" value="Research articles on food blog">
             </div>
             <div>
                 <label for="description">Description:</label>
@@ -38,6 +38,17 @@
             </div>
         </div>
     </div>
+
+    <form id="add-project-modal" class="hidden">
+        <div class="add-project-dialog">
+            <h2>Add Project</h2>
+            <div>
+                <label for="proj-title">Title:</label>
+                <input class="add-project-input" type="text" id="proj-title" name="proj-title" placeholder="Project Name" value="New Project" required>
+            </div>
+            <button type="submit" class="add-project-btn">Confirm</button>
+        </div>
+    </form>
 
     <div class="sidebar">
         <h1 class="header">Taskify</h1>
@@ -67,13 +78,12 @@
                 </div>
             </div>
 
-            <div class="projects-header">
+            <div class="projects-header add-project">
                 <h2 class="projects-header-text">Projects</h2>
                 <svg class="add-project-img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><title>Add New Project</title><path d="M17,13H13V17H11V13H7V11H11V7H13V11H17M12,2A10,10 0 0,0 2,12A10,10 0 0,0 12,22A10,10 0 0,0 22,12A10,10 0 0,0 12,2Z" /></svg>
             </div>
             <div class="projects">
                 <div>Project Filler 1</div>
-                <div>Project Filler 2</div>
             </div>
 
         </div>
@@ -91,7 +101,7 @@
                     </div>
                 </div>
                 <div>
-                    <div class="add-task-btn2">
+                    <div class="add-task-btn2 add-project">
                         <svg class="add-task-img2" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><title>Add New Task</title><path d="M17,13H13V17H11V13H7V11H11V7H13V11H17M12,2A10,10 0 0,0 2,12A10,10 0 0,0 12,22A10,10 0 0,0 22,12A10,10 0 0,0 12,2Z" /></svg>
                         <h2 class="add-task-text2">Add Project</h2>
                     </div>

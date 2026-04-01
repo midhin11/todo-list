@@ -6,10 +6,20 @@ import { Task } from "./JS/task-class.js"
 import { tasks } from "./JS/all-tasks.js";
 import { renderTasks } from "./JS/render-tasks.js";
 
+renderTasks(tasks, "All"); // To add cards in HTML to DOM
 
 let addTask = document.querySelectorAll(".add-task");
 let modal = document.querySelector("#modal");   
 let inputDialog = document.querySelector(".input-dialog");
+let addProjectModal = document.querySelector("#add-project-modal");
+let addProjectDialog = document.querySelector(".add-project-dialog");
+let modalMode;
+let currentTaskId;
+
+let taskNameInput = document.querySelector(`.add-task-input`);
+let taskDescInput = document.querySelector("textarea");
+let taskDueDateInput = document.querySelector(`input[type="datetime-local"]`);
+let taskPriorityInput = document.querySelector("select");
 
 //Task input modal pop-up
 
@@ -17,6 +27,13 @@ modal.addEventListener("click", function(){
     modal.classList.add("hidden");
 })
 inputDialog.addEventListener("click", function(e){
+    e.stopPropagation();
+})
+
+addProjectModal.addEventListener("click", function(){
+    addProjectModal.classList.add("hidden");
+})
+addProjectDialog.addEventListener("click", function(e){
     e.stopPropagation();
 })
 
@@ -28,8 +45,6 @@ container.addEventListener("click", function(e){
     if(!deleteBtn) return;
 
     let card = deleteBtn.closest(".task-card");
-    // let index = card.getAttribute("data-index");
-    // tasks.splice(index, 1);
 
     let id = card.dataset.id;
     let index = tasks.findIndex(task => task.id === id);
@@ -44,6 +59,7 @@ container.addEventListener("click", function(e){
 
 addTask.forEach(btn => {
     btn.addEventListener("click", function(){
+        modalMode = "add";
         modal.classList.remove("hidden");
     })
 })
@@ -52,24 +68,18 @@ addTask.forEach(btn => {
 
 let submit = document.querySelector(".submit-btn");
 submit.addEventListener("click", function(){
-    let taskNameInput = document.querySelector(`input[type="text"]`);
+    if(modalMode === "add"){
+        add();
+    } else if(modalMode === "edit"){
+        edit();
+    }
+})
+
+function add() {
+
     let taskName = taskNameInput.value;
-
-    let taskDescInput = document.querySelector("textarea");
     let taskDesc = taskDescInput.value;
-
-    let taskDueDateInput = document.querySelector(`input[type="datetime-local"]`);
     let taskDueDateUnformatted = taskDueDateInput.value;
-    let taskDueDate = taskDueDateUnformatted;
-    // let taskDueDate = new Date(taskDueDateUnformatted).toLocaleString("en-IN", {
-    //     day: "2-digit",
-    //     month: "short",
-    //     year: "2-digit",
-    //     hour: "2-digit",
-    //     minute: "2-digit"
-    // })
-
-    let taskPriorityInput = document.querySelector("select");
     let taskPriority = taskPriorityInput.value;
 
     let newTask = new Task(taskName, taskDesc, taskDueDateUnformatted, taskPriority);
@@ -81,7 +91,7 @@ submit.addEventListener("click", function(){
     // taskDescInput.value = "";
     // taskDueDateInput.value = "";
     // taskPriorityInput.value = "";
-}) 
+}
 
 // Cancel Btn in Input Dialog
 
@@ -89,10 +99,6 @@ let cancelBtn = document.querySelector(".cancel-btn");
 cancelBtn.addEventListener("click", function() {
     modal.classList.add("hidden");
 
-    let taskNameInput = document.querySelector(`input[type="text"]`);
-    let taskDescInput = document.querySelector("textarea");
-    let taskDueDateInput = document.querySelector(`input[type="datetime-local"]`);
-    let taskPriorityInput = document.querySelector("select");
     taskNameInput.value = "Research articles on food blog";
     taskDescInput.value = "Lorem ipsum dolor sit amet consectetur, adipisicing elit.";
     taskDueDateInput.value = "2025-06-01T08:30";
@@ -112,3 +118,61 @@ byDateBtns.addEventListener("click", function(e){
     renderTasks(tasks, mainHeader.textContent);
 })
 
+
+// Expand task
+
+container.addEventListener("click", function(e){
+    let expandBtn = e.target.closest(".expand-task");
+    if(!expandBtn) return;
+    modalMode = "edit";
+    modal.classList.remove("hidden");
+    let card = expandBtn.closest(".task-card");
+    let id = currentTaskId = card.dataset.id;
+    let tasktoExpand = tasks.find(task => task.id === id);
+
+    taskNameInput.value = tasktoExpand.title;
+    taskDescInput.value = tasktoExpand.desc;
+    taskDueDateInput.value = tasktoExpand.dueDate;
+    taskPriorityInput.value = tasktoExpand.priority;
+})
+
+
+function edit() {
+    let taskBeingEdited = tasks.find(task => task.id === currentTaskId);    
+
+    taskBeingEdited.title = taskNameInput.value;
+    taskBeingEdited.desc = taskDescInput.value;
+    taskBeingEdited.dueDate = taskDueDateInput.value;
+    taskBeingEdited.priority = taskPriorityInput.value;
+
+    modal.classList.add("hidden");
+    renderTasks(tasks, mainHeader.textContent);
+}
+
+
+// Add Project 
+
+let addProject = document.querySelectorAll(".add-project");
+addProject.forEach(btn => {
+    btn.addEventListener("click", function(){
+        addProjectModal.classList.remove("hidden");
+    })
+})
+
+let addProjectForm = document.querySelector("#add-project-modal");
+let projects = document.querySelector(".projects");
+
+addProjectForm.addEventListener("submit", function(e){
+    e.preventDefault(); 
+
+    let input = document.querySelector(".add-project-input");
+
+    let newProject = document.createElement("div");
+    newProject.textContent = input.value;
+    projects.append(newProject);
+
+    addProjectForm.classList.add("hidden");
+    input.value = "";
+});
+
+// Project 

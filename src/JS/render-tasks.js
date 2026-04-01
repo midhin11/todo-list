@@ -2,7 +2,7 @@
 
 export function renderTasks(tasks, mainHeaderText) {
     let container = document.querySelector(".main-content");
-    container.innerHTML = "";   // Codebreaker
+    container.innerHTML = "";   
     let today = new Date();
     today.setHours(0,0,0,0);
     let filteredTasks = [];
@@ -95,6 +95,3 @@ function emptyTasksTextGen(container, tasks) {
     }
 }
 
-function renderAllTasks(container, tasks) {
-
-}

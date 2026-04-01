@@ -268,7 +268,7 @@ h1, h2, h3, h4, h5, h6, p {
   display: none;
 }
 
-#modal {
+#modal, #add-project-modal {
   position: fixed;
   height: 100%;
   width: 100%;
@@ -302,7 +302,7 @@ label {
   vertical-align: middle;
 }
 
-.input-dialog > * {
+.input-dialog > *, .add-project-dialog > * {
   margin-bottom: 15px;
   display: flex;
   align-items: center;
@@ -364,4 +364,44 @@ input {
 .task-input-btns button:hover {
   background-color: transparent;
   color: white;
+}
+
+/* Add Project Dialog */
+
+.add-project-dialog {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 500px;
+  height: 150px;
+  
+  background-color: oklch(27.9% 0.041 260.031);
+  border-radius: 10px;
+  padding: 20px 20px 20px 0px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.add-project-dialog label {
+  margin: 0;
+  padding: 0; 
+  /* border: 2px solid red; */
+  text-align: center;
+  width: 70px;
+}
+
+.add-project-dialog button {
+  padding: 6px 10px;
+  width: 80px;
+  display: flex;
+  justify-content: center;
+  cursor: pointer;
+  border-radius: 5px;
+  background-color: cyan;
+  color: black;
+  border: 1px solid black;
+  font-weight: 700;
+  transition: transform 0.1s ease;
 }
