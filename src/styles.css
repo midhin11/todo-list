@@ -408,4 +408,9 @@ input {
 
 .done {
   text-decoration: line-through;
+  text-decoration-thickness: 2px;
+}
+
+.task-title.done, .task-due.done {
+  color: rgba(255, 255, 255, 0.71)
 }
