@@ -320,7 +320,6 @@ input {
 
 ::placeholder {
   font-style: italic;
-  /* font-weight: 700; */
 }
 
 .task-input-btns{
@@ -387,7 +386,6 @@ input {
 .add-project-dialog label {
   margin: 0;
   padding: 0; 
-  /* border: 2px solid red; */
   text-align: center;
   width: 70px;
 }

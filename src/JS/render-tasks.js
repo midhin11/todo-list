@@ -25,7 +25,11 @@ export function renderTasks(tasks, mainHeaderText) {
             taskDate.setHours(0,0,0,0); 
             return taskDate.getTime() < today.getTime();
         })
-    } else filteredTasks = tasks;
+    } else if (mainHeaderText === "All") {
+        filteredTasks = tasks;
+    } else {
+        filteredTasks = tasks.filter(task => task.project === mainHeaderText);
+    }
 
     emptyTasksTextGen(container, filteredTasks);
 

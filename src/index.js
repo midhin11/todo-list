@@ -15,6 +15,7 @@ let addProjectModal = document.querySelector("#add-project-modal");
 let addProjectDialog = document.querySelector(".add-project-dialog");
 let modalMode;
 let currentTaskId;
+let currentProject;
 
 let taskNameInput = document.querySelector(`.add-task-input`);
 let taskDescInput = document.querySelector("textarea");
@@ -85,7 +86,9 @@ function add() {
     let taskDueDateUnformatted = taskDueDateInput.value;
     let taskPriority = taskPriorityInput.value;
 
+    let selectedProject = currentProject || "";
     let newTask = new Task(taskName, taskDesc, taskDueDateUnformatted, taskPriority);
+    newTask.project = selectedProject
 
     tasks.push(newTask);
     renderTasks(tasks, mainHeader.textContent); 
@@ -185,6 +188,11 @@ addProjectForm.addEventListener("submit", function(e){
     let newProject = document.createElement("div");
     newProject.textContent = input.value;
     projects.append(newProject);
+    newProject.addEventListener("click", function(){
+        currentProject = newProject.textContent;
+        mainHeader.textContent = currentProject;
+        renderTasks(tasks, currentProject);
+    })
 
     addProjectForm.classList.add("hidden");
     input.value = "";

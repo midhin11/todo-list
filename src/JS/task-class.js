@@ -8,5 +8,6 @@ export class Task{
         this.priority = priority;
         this.id = crypto.randomUUID();
         this.completed = false;
+        this.project = "";
     }
 }
