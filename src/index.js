@@ -15,6 +15,7 @@ let addProjectModal = document.querySelector("#add-project-modal");
 let addProjectDialog = document.querySelector(".add-project-dialog");
 let modalMode;
 let currentTaskId;
+let defaultProject = document.querySelector(".projects > div:nth-of-type(1) > div");
 let currentProject;
 
 let taskNameInput = document.querySelector(`.add-task-input`);
@@ -186,16 +187,53 @@ addProjectForm.addEventListener("submit", function(e){
     let input = document.querySelector(".add-project-input");
 
     let newProject = document.createElement("div");
-    newProject.textContent = input.value;
-    projects.append(newProject);
-    newProject.addEventListener("click", function(){
-        currentProject = newProject.textContent;
-        mainHeader.textContent = currentProject;
-        renderTasks(tasks, currentProject);
-    })
+    let newProjectTitle = document.createElement("div");
+    newProjectTitle.textContent = input.value;
+    newProjectTitle.classList.add("project-title");
+    let newProjectDeleteBtn = document.createElement("div");
+    newProjectDeleteBtn.innerHTML = `<svg class="project-delete-btn" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><title>Delete Project</title><path d="M18,19C18,20.66 16.66,22 15,22H8C6.34,22 5,20.66 5,19V7H4V4H8.5L9.5,3H13.5L14.5,4H19V7H18V19M6,7V19C6,20.1 6.9,21 8,21H15C16.1,21 17,20.1 17,19V7H6M18,6V5H14L13,4H10L9,5H5V6H18M8,9H9V19H8V9M14,9H15V19H14V9Z" /></svg>`;
+    newProject.classList.add("project");
+    newProject.append(newProjectTitle, newProjectDeleteBtn);    
+    projects.append(newProject); 
 
     addProjectForm.classList.add("hidden");
     input.value = "";
 });
 
-// Project 
+// Project delete 
+
+projects.addEventListener("click", function(e){
+
+    let deleteBtn = e.target.closest(".project-delete-btn");
+
+    if(deleteBtn){
+        e.stopPropagation();
+        let projectElement = deleteBtn.closest(".project");
+        let projectTitle = projectElement.querySelector(".project-title").textContent;
+
+        let updatedTasks = tasks.filter(task => task.project !== projectTitle);
+
+        tasks.length = 0;
+        tasks.push(...updatedTasks);
+
+        projectElement.remove();
+
+        currentProject = null;
+        mainHeader.textContent = "All";
+        renderTasks(tasks, "All");
+        
+        return;
+    }
+
+    // 2️⃣ SELECT PROJECT LOGIC (this replaces newProject.addEventListener)
+    let projectElement = e.target.closest(".project");
+
+    if(projectElement){
+        let projectTitle = projectElement.querySelector(".project-title").textContent;
+
+        currentProject = projectTitle;
+        mainHeader.textContent = projectTitle;
+        renderTasks(tasks, projectTitle);
+    }
+
+});

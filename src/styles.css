@@ -74,12 +74,18 @@ h1, h2, h3, h4, h5, h6, p {
 .by-date > * {
   margin-bottom: 5px;
   padding: 5px;
+  transition: transform 0.1s ease;
 }
 
 .by-date > *:hover {
   background-color: oklch(27.9% 0.041 260.031);
   cursor: pointer;
 }
+
+.by-date > *:active {
+  transform: scale(0.95);
+}
+
 
 .by-date > div {
   display: flex;
@@ -130,6 +136,9 @@ h1, h2, h3, h4, h5, h6, p {
   padding: 5px;
   margin-bottom: 5px;
   transition: transform 0.1s ease;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
 }
 
 .projects > *:hover {
@@ -137,6 +146,19 @@ h1, h2, h3, h4, h5, h6, p {
   cursor: pointer;
 }
 
+.projects > *:active {
+  transform: scale(0.95);
+}
+
+.projects svg {
+  width: 20px;
+  fill: white;
+  cursor: pointer;
+}
+
+.projects svg:hover {
+  fill: cyan;
+}
 
 /* MAIN */
 
