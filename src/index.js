@@ -5,7 +5,14 @@ import { Task } from "./JS/task-class.js"
 ;
 import { tasks } from "./JS/all-tasks.js";
 import { renderTasks } from "./JS/render-tasks.js";
+import { saveTasks } from "./JS/localStorage.js";
+import { dummyTasks } from "./JS/dummy-tasks.js";
 
+if (localStorage.getItem("hasInitialized") !== "true") {
+    dummyTasks(tasks);
+    saveTasks(tasks);
+    localStorage.setItem("hasInitialized", "true");
+}
 renderTasks(tasks, "All"); // To add cards in HTML to DOM
 
 let addTask = document.querySelectorAll(".add-task");
@@ -56,6 +63,7 @@ container.addEventListener("click", function(e){
         tasks.splice(index, 1);
     }
 
+    saveTasks(tasks);
     renderTasks(tasks, mainHeader.textContent);
 })
 
@@ -92,6 +100,7 @@ function add() {
     newTask.project = selectedProject
 
     tasks.push(newTask);
+    saveTasks(tasks);
     renderTasks(tasks, mainHeader.textContent); 
     modal.classList.add("hidden");
     // taskNameInput.value = "";
@@ -152,11 +161,11 @@ function edit() {
     taskBeingEdited.priority = taskPriorityInput.value;
 
     modal.classList.add("hidden");
+    saveTasks(tasks);
     renderTasks(tasks, mainHeader.textContent);
 }
 
 // Check task Btn
-
 
 container.addEventListener("click", function(e){
     let completedBtn = e.target.closest(".complete");
@@ -165,6 +174,7 @@ container.addEventListener("click", function(e){
     let id = card.dataset.id;
     let completedTask = tasks.find(task => task.id === id);
     completedTask.completed = !completedTask.completed;
+    saveTasks(tasks);
     renderTasks(tasks, mainHeader.textContent);
 })
 
@@ -220,6 +230,7 @@ projects.addEventListener("click", function(e){
 
         currentProject = null;
         mainHeader.textContent = "All";
+        saveTasks(tasks);
         renderTasks(tasks, "All");
         
         return;
@@ -233,6 +244,7 @@ projects.addEventListener("click", function(e){
 
         currentProject = projectTitle;
         mainHeader.textContent = projectTitle;
+        saveTasks(tasks);
         renderTasks(tasks, projectTitle);
     }
 
