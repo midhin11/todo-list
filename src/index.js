@@ -103,10 +103,10 @@ function add() {
     saveTasks(tasks);
     renderTasks(tasks, mainHeader.textContent); 
     modal.classList.add("hidden");
-    // taskNameInput.value = "";
-    // taskDescInput.value = "";
-    // taskDueDateInput.value = "";
-    // taskPriorityInput.value = "";
+    taskNameInput.value = "";
+    taskDescInput.value = "";
+    taskDueDateInput.value = "";
+    taskPriorityInput.value = "";
 }
 
 // Cancel Btn in Input Dialog
